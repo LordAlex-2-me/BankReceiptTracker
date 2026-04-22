@@ -1,0 +1,16 @@
+# Secret files - never push these
+credentials.json
+token.json
+
+# Excel file - personal data
+transactions.xlsx
+
+# PyInstaller output
+dist/
+build/
+*.spec
+
+# Python cache
+__pycache__/
+*.pyc
+.venv/
