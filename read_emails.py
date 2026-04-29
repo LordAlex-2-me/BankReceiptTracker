@@ -57,6 +57,7 @@ def fetch_bank_emails():
     query = "from:FirstAlert@firstbanknigeria.com is:unread"
 
     messages = search_emails(service, query)
+    messages = list(reversed(messages))
 
     if not messages:
         print("No new bank emails found.")
