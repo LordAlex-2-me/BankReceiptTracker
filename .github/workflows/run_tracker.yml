@@ -1,0 +1,35 @@
+name: Bank Receipt Tracker
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # runs every 5 minutes
+  workflow_dispatch:        # allows you to trigger it manually from GitHub
+
+jobs:
+  check-emails:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Pull your code from the repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client python-telegram-bot openpyxl
+
+      # Step 4: Run the tracker
+      - name: Run tracker
+        env:
+          GMAIL_TOKEN: ${{ secrets.GMAIL_TOKEN }}
+          GMAIL_CREDENTIALS: ${{ secrets.GMAIL_CREDENTIALS }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python read_emails.py
