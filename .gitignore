@@ -14,5 +14,3 @@ build/
 __pycache__/
 *.pyc
 .venv/
-
-config.py
