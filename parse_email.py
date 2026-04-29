@@ -12,6 +12,17 @@ def extract_transaction(email_body):
     amount_pattern = r'Amount:\s*([\d,]+\.\d{2})\s*(DR|CR)'
     match = re.search(amount_pattern, email_body, re.IGNORECASE)
 
+    # --- Extract cleared balance ---
+    # Matches: "Cleared Balance: NGN8,578.49 CR"
+    balance_pattern = r'Cleared Balance:\s*NGN([\d,]+\.\d{2})'
+    balance_match = re.search(balance_pattern, email_body, re.IGNORECASE)
+
+    if balance_match:
+        raw_balance = balance_match.group(1).replace(',', '')
+        transaction['balance'] = float(raw_balance)
+    else:
+        transaction['balance'] = None
+
     if match:
         raw_amount = match.group(1).replace(',', '')
         transaction['amount'] = float(raw_amount)

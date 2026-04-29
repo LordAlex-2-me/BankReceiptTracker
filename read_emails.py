@@ -2,7 +2,7 @@ import base64
 import re
 from auth_test import authenticate  # reuse the auth function you already wrote
 from parse_email import extract_transaction
-from excel_logger import log_transaction
+from telegram_notifier import notify
 
 def get_gmail_service():
     creds = authenticate()
@@ -70,7 +70,7 @@ def fetch_bank_emails():
         print(f"Processing email {msg['id']}...")
 
         if transaction['amount']:
-            log_transaction(transaction)
+            notify(transaction)
             mark_as_read(service, msg['id'])
         else:
             print("Could not parse amount — skipping.")
