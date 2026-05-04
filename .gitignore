@@ -2,9 +2,6 @@
 credentials.json
 token.json
 
-# Excel file - personal data
-transactions.xlsx
-
 # PyInstaller output
 dist/
 build/
