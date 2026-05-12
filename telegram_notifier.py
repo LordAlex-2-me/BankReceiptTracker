@@ -4,7 +4,7 @@ from config import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
 
 async def send_telegram_message(transaction):
     bot = Bot(token=TELEGRAM_TOKEN)
-
+    
     # Determine emoji and label based on transaction type
     if transaction['type'] == 'debit':
         arrow = "📉"
@@ -28,6 +28,9 @@ async def send_telegram_message(transaction):
         balance = f"₦{balance:,.2f}"
 
     description = transaction.get('description') or 'Bank Transaction'
+    # Escape special Markdown characters so Telegram doesn't misread them
+import re
+description = re.sub(r'([_*\[\]()~`>#+\-=|{}.!])', r'\\\1', description)
 
     message = (
         f"🏦 *FirstBank Alert*\n"
