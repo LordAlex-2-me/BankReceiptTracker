@@ -4,7 +4,6 @@ def extract_transaction(email_body):
     transaction = {
         'type': None,
         'amount': None,
-        'description': None
     }
 
     # --- Extract amount and type ---
@@ -32,11 +31,5 @@ def extract_transaction(email_body):
             transaction['type'] = 'debit'
         else:
             transaction['type'] = 'credit'
-
-    # --- Extract description from Narration line ---
-    # Matches: "Narration: POS TRAN-WEMA POS/LA/NG/20042026"
-    desc_match = re.search(r'Narration:\s*(.+)', email_body)
-    if desc_match:
-        transaction['description'] = desc_match.group(1).strip()
 
     return transaction
