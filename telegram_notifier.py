@@ -1,3 +1,4 @@
+import re
 import asyncio
 from telegram import Bot
 from config import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
@@ -29,10 +30,9 @@ async def send_telegram_message(transaction):
 
     description = transaction.get('description') or 'Bank Transaction'
     # Escape special Markdown characters so Telegram doesn't misread them
-import re
-description = re.sub(r'([_*\[\]()~`>#+\-=|{}.!])', r'\\\1', description)
-
-message = (
+    description = re.sub(r'([_*\[\]()~`>#+\-=|{}.!])', r'\\\1', description)
+    
+    message = (
         f"🏦 *FirstBank Alert*\n"
         f"─────────────────\n"
         f"{arrow} *{label}:* ₦{sign}{amount}\n"
