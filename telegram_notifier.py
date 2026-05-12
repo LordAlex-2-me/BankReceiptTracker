@@ -43,7 +43,7 @@ description = re.sub(r'([_*\[\]()~`>#+\-=|{}.!])', r'\\\1', description)
     await bot.send_message(
         chat_id=TELEGRAM_CHAT_ID,
         text=message,
-        parse_mode='Markdown'
+        parse_mode='MarkdownV2'
     )
     print(f"Telegram notification sent: {label} ₦{amount}")
 
