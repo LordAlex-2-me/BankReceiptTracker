@@ -32,7 +32,7 @@ async def send_telegram_message(transaction):
 import re
 description = re.sub(r'([_*\[\]()~`>#+\-=|{}.!])', r'\\\1', description)
 
-    message = (
+message = (
         f"🏦 *FirstBank Alert*\n"
         f"─────────────────\n"
         f"{arrow} *{label}:* ₦{sign}{amount}\n"
