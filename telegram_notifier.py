@@ -28,15 +28,10 @@ async def send_telegram_message(transaction):
     if isinstance(balance, float):
         balance = f"₦{balance:,.2f}"
 
-    description = transaction.get('description') or 'Bank Transaction'
-    # Escape special Markdown characters so Telegram doesn't misread them
-    description = re.sub(r'([_*\[\]()~`>#+\-=|{}.!])', r'\\\1', description)
-    
     message = (
         f"🏦 *FirstBank Alert*\n"
         f"─────────────────\n"
         f"{arrow} *{label}:* ₦{sign}{amount}\n"
-        f"📝 {description}\n"
         f"💰 *Balance:* {balance}"
     )
 
