@@ -10,7 +10,7 @@ async def send_telegram_message(transaction):
     if transaction['type'] == 'debit':
         arrow = "📉"
         label = "Debit"
-        sign = "-"
+        sign = "\\-"
     elif transaction['type'] == 'credit':
         arrow = "📈"
         label = "Credit"
@@ -28,17 +28,16 @@ async def send_telegram_message(transaction):
     if isinstance(balance, float):
         balance = f"₦{balance:,.2f}"
 
-    message = (
-        f"🏦 *FirstBank Alert*\n"
-        f"─────────────────\n"
-        f"{arrow} *{label}:* ₦{sign}{amount}\n"
-        f"💰 *Balance:* {balance}"
-    )
+message = (
+    f"🏦 <b>FirstBank Alert</b>\n"
+    f"{arrow} <b>{label}:</b> ₦{sign}{amount}\n"
+    f"💰 <b>Balance:</b> {balance}"
+)
 
     await bot.send_message(
         chat_id=TELEGRAM_CHAT_ID,
         text=message,
-        parse_mode='MarkdownV2'
+        parse_mode='HTML'
     )
     print(f"Telegram notification sent: {label} ₦{amount}")
 
