@@ -34,7 +34,7 @@ message = (
     f"💰 <b>Balance:</b> {balance}"
 )
 
-    await bot.send_message(
+await bot.send_message(
         chat_id=TELEGRAM_CHAT_ID,
         text=message,
         parse_mode='HTML'
